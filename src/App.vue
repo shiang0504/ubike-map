@@ -1,5 +1,6 @@
 <script setup>
-import {computed, onMounted, ref, watchEffect} from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
+import { getImageUrl } from './JS/getImageUrl.js'
 import axios from 'axios';
 // *import leaflet
 import 'leaflet/dist/leaflet.css';
@@ -17,7 +18,7 @@ const bycicle_empty = ref([])
 const bycicle_available = ref([])
 onMounted(()=>{
   // 打API 並分類資料
-  watchEffect(async()=>{  
+  watchEffect(async()=>{
     const { data } = await axios.get(apiUrl.value)
     bycicle_all.value.push(...data) // api打回總數
     bycicle_available.value.push(...bycicle_all.value.filter(i=>i.bemp!==0 && i.sbi!==0)) // 皆不等於0(可租可還)
@@ -43,9 +44,10 @@ onMounted(()=>{
         popupAnchor: [0, -20], // popup偏移
       }
     })
-    const bycicle_available_icon = new icon({iconUrl: "/src/assets/bycicle-available.png"});
-    const bycicle_full_icon = new icon({iconUrl: "/src/assets/bycicle-full.png"});
-    const bycicle_empty_icon = new icon({iconUrl: "/src/assets/bycicle-empty.png"});
+    console.log(getImageUrl('bycicle-available.png'))
+    const bycicle_available_icon = new icon({iconUrl: getImageUrl('bycicle-available.png')});
+    const bycicle_full_icon = new icon({iconUrl: getImageUrl('bycicle-full.png')});
+    const bycicle_empty_icon = new icon({iconUrl: getImageUrl('bycicle-empty.png')});
     // 引用markerClusterGroup()叢集方法
     var markers = L.markerClusterGroup();
     // *L.marker(latlng, options) 製作標記: latlng 設定圖標經緯度，options 設定圖標狀態：draggable: true可拖曳
@@ -64,7 +66,6 @@ onMounted(()=>{
   })
 })
 </script>
-
 <template>  
   <div id="map" ref="mapDom"></div>
   <div class="icons">
