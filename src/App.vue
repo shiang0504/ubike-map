@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted, ref, watchEffect } from 'vue'
-import { getImageUrl } from './JS/getImageUrl.js'
+const getImageUrl=(file)=>{
+  return new URL(`./assets/${file}`, import.meta.url).href
+}
 import axios from 'axios';
 // *import leaflet
 import 'leaflet/dist/leaflet.css';
@@ -44,7 +46,6 @@ onMounted(()=>{
         popupAnchor: [0, -20], // popup偏移
       }
     })
-    console.log(getImageUrl('bycicle-available.png'))
     const bycicle_available_icon = new icon({iconUrl: getImageUrl('bycicle-available.png')});
     const bycicle_full_icon = new icon({iconUrl: getImageUrl('bycicle-full.png')});
     const bycicle_empty_icon = new icon({iconUrl: getImageUrl('bycicle-empty.png')});
