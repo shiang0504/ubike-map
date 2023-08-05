@@ -49,6 +49,7 @@ onMounted(()=>{
     const bycicle_available_icon = new icon({iconUrl: getImageUrl('bycicle-available.png')});
     const bycicle_full_icon = new icon({iconUrl: getImageUrl('bycicle-full.png')});
     const bycicle_empty_icon = new icon({iconUrl: getImageUrl('bycicle-empty.png')});
+    const initPosition_icon = new icon({iconUrl: getImageUrl('initPosition.png')});
     // 引用markerClusterGroup()叢集方法
     var markers = L.markerClusterGroup();
     // *L.marker(latlng, options) 製作標記: latlng 設定圖標經緯度，options 設定圖標狀態：draggable: true可拖曳
@@ -63,7 +64,7 @@ onMounted(()=>{
     .forEach(marker => markers.addLayer(marker))
     // 繪製叢集至地圖上
     map.addLayer(markers)
-    L.marker(initPosition).addTo(map) //加一個目前位置
+    L.marker(initPosition,{icon: initPosition_icon}).addTo(map) //加一個目前位置
   })
 })
 </script>
