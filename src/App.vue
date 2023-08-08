@@ -101,21 +101,24 @@ onMounted(()=>{
 </template>
 <style lang="scss" scoped>
 #map{
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   background: darkcyan;
-  border-radius: 0 30px 0 30px;
 }
 #message{
   position: absolute;
+  padding: 0 5px;
   right: 0;
   top: 0;
-  color: white;
+  color: rgb(98, 98, 98);
   font-size: 20px;
+  z-index: 800;
+  background: rgb(255, 255, 255, 0.7);
+  border-radius: 30px;
 }
 .icons{
   position: absolute;
-  bottom: 5%;
+  bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
@@ -123,7 +126,7 @@ onMounted(()=>{
   height: 100px;
   background: rgb(255, 255, 255, 0.7);
   border-radius: 30px 30px 0 0;
-  z-index: 800;
+  z-index: 1000;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

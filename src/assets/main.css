@@ -9,4 +9,6 @@ body, #app {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; /* 使手機下滑重新整理失效 */
+  max-height: -webkit-fill-available; /* 使100vh包含工具列 */
 }
