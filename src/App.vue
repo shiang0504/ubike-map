@@ -64,7 +64,20 @@ onMounted(()=>{
     .forEach(marker => markers.addLayer(marker))
     // 繪製叢集至地圖上
     map.addLayer(markers)
-    L.marker(initPosition,{icon: initPosition_icon}).addTo(map) //加一個目前位置
+    const marker = L.marker(initPosition,{icon: initPosition_icon}).addTo(map) //加一個目前位置
+    // 獲取使用者地理位置
+    map.locate({
+      setView: false, // 是否讓地圖跟著移動中心點
+      watch: true, // 是否要一直監測使用者位置
+      maxZoom: 18, // 最大的縮放值
+      enableHighAccuracy: true, // 是否要高精準度的抓位置
+      timeout: 10000 // 觸發locationerror事件之前等待的毫秒數
+    });
+    function foundHandler(e) {
+      map.panTo(e.latlng) // 移動地圖中心點
+      marker.setLatLng(e.latlng) // 移動 marker
+    }
+    map.on('locationfound', foundHandler) // 使用者點擊允許觸發locationfound
   })
 })
 </script>
